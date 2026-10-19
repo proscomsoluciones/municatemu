@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -22,8 +22,19 @@ import { InstantSearch } from '@/components/ui/InstantSearch';
 import { HeroAconcaguaSvg } from '@/components/ui/HeroAconcaguaSvg';
 import { SEED_TRAMITES, SEED_NOTICIAS, SEED_DOCUMENTOS, TRANSPARENCIA_LINKS } from '@/data/seedData';
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/ui/ScrollReveal';
+import { HomeLoadingSkeleton } from '@/components/ui/Skeletons';
 
 export default function PortadaPage() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Micro-delay skeleton for initial page render
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 280);
+    return () => clearTimeout(timer);
+  }, []);
+
   const tramitesDestacados = SEED_TRAMITES.filter((t) => t.destacado);
   const noticiasRecientes = SEED_NOTICIAS.slice(0, 4);
   const documentosRecientes = SEED_DOCUMENTOS.slice(0, 4);
@@ -47,6 +58,10 @@ export default function PortadaPage() {
       'email': 'contacto@municatemu.cl'
     }
   };
+
+  if (isLoading) {
+    return <HomeLoadingSkeleton />;
+  }
 
   return (
     <div className="w-full space-y-16 pb-16 overflow-hidden">
