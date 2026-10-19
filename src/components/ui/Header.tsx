@@ -6,8 +6,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAccessibility } from '@/context/AccessibilityContext';
 import { 
-  Sun, 
-  Moon, 
   Type, 
   Menu, 
   X, 
@@ -21,7 +19,7 @@ import {
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const { fontScale, increaseFontScale, resetFontScale, theme, toggleTheme } = useAccessibility();
+  const { fontScale, increaseFontScale, resetFontScale } = useAccessibility();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -81,24 +79,6 @@ export const Header: React.FC = () => {
                 Restablecer
               </button>
             )}
-
-            <button
-              onClick={toggleTheme}
-              className="flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-[#F07D26] transition-all text-xs font-medium"
-              aria-label={theme === 'light' ? 'Activar modo oscuro' : 'Activar modo claro'}
-            >
-              {theme === 'light' ? (
-                <>
-                  <Moon className="w-3.5 h-3.5 text-yellow-300" aria-hidden="true" />
-                  <span className="hidden sm:inline">Modo Oscuro</span>
-                </>
-              ) : (
-                <>
-                  <Sun className="w-3.5 h-3.5 text-[#F07D26]" aria-hidden="true" />
-                  <span className="hidden sm:inline">Modo Claro</span>
-                </>
-              )}
-            </button>
           </div>
         </div>
       </div>

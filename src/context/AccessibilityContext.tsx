@@ -14,20 +14,12 @@ const AccessibilityContext = createContext<AccessibilityContextType | undefined>
 
 export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [fontScale, setFontScale] = useState<number>(1);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme] = useState<'light'>('light');
 
   useEffect(() => {
-    // Check initial system theme preference or saved preference
-    const savedTheme = localStorage.getItem('catemu-theme') as 'light' | 'dark' | null;
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    if (initialTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // Always enforce light mode
+    document.documentElement.classList.remove('dark');
+    localStorage.removeItem('catemu-theme');
 
     const savedFontScale = localStorage.getItem('catemu-font-scale');
     if (savedFontScale) {
@@ -57,16 +49,8 @@ export const AccessibilityProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      const next = prev === 'light' ? 'dark' : 'light';
-      if (next === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      localStorage.setItem('catemu-theme', next);
-      return next;
-    });
+    // Mode is locked to light mode
+    document.documentElement.classList.remove('dark');
   };
 
   return (

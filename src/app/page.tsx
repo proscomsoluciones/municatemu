@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Car, 
   Store, 
@@ -211,16 +212,26 @@ export default function PortadaPage() {
                   className="bg-white dark:bg-[#15241C] rounded-2xl overflow-hidden border border-lineas/80 dark:border-verde-valle/30 shadow-card hover:shadow-card-hover hover:border-[#5E1757]/40 dark:hover:border-[#F59347]/40 transition-all flex flex-col justify-between h-full group"
                 >
                   <div>
-                    <div className="relative h-44 bg-[#F4EAF5]/60 dark:bg-[#351737]/40 flex items-center justify-center p-4 overflow-hidden">
-                      {/* Accessible decorative fallback image banner with subtle zoom */}
-                      <div className="w-full h-full rounded-xl bg-gradient-to-br from-[#5E1757]/20 via-[#A82245]/20 to-[#F07D26]/20 flex items-center justify-center text-[#5E1757] dark:text-[#F59347] font-bold text-center px-4 group-hover:scale-105 transition-transform duration-500">
-                        <span>{noticia.categoria}</span>
-                      </div>
-                      <span className="absolute top-3 left-3 bg-[#5E1757] text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow">
+                    <div className="relative h-48 bg-[#F4EAF5]/60 flex items-center justify-center overflow-hidden">
+                      {noticia.imagen_url ? (
+                        <Image
+                          src={noticia.imagen_url}
+                          alt={noticia.imagen_alt || noticia.titulo}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full rounded-xl bg-gradient-to-br from-[#5E1757]/20 via-[#A82245]/20 to-[#F07D26]/20 flex items-center justify-center text-[#5E1757] font-bold text-center px-4">
+                          <span>{noticia.categoria}</span>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                      <span className="absolute top-3 left-3 bg-[#5E1757] text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow z-10">
                         {noticia.categoria}
                       </span>
                       {noticia.es_aviso_urgente && (
-                        <span className="absolute top-3 right-3 bg-[#F07D26] text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow flex items-center gap-1 animate-pulse">
+                        <span className="absolute top-3 right-3 bg-[#F07D26] text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow flex items-center gap-1 animate-pulse z-10">
                           <AlertCircle className="w-3 h-3" />
                           <span>Vigente</span>
                         </span>

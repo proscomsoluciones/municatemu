@@ -7,6 +7,7 @@ import { Footer } from '@/components/ui/Footer';
 import { TopBannerAlert } from '@/components/ui/TopBannerAlert';
 import { ScrollProgress } from '@/components/ui/ScrollProgress';
 import { ScrollToTop } from '@/components/ui/ScrollToTop';
+import { Analytics } from '@vercel/analytics/next';
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -76,6 +77,9 @@ export default function RootLayout({
 
           {/* Footer Landmark */}
           <Footer />
+
+          {/* Vercel Web Analytics */}
+          <Analytics />
         </AccessibilityProvider>
       </body>
     </html>
