@@ -1,0 +1,10 @@
+# Security Disclosure Policy for Municipalidad de Catemu
+# Conforme a la Ley N° 21.663 de Ciberseguridad
+
+Contact: mailto:ciberseguridad@municatemu.cl
+Contact: https://www.municatemu.cl/contacto
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://www.municatemu.cl/pgp-key.txt
+Preferred-Languages: es, en
+Canonical: https://www.municatemu.cl/.well-known/security.txt
+Policy: https://www.municatemu.cl/privacidad
